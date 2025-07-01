@@ -3,14 +3,14 @@ import styles from '../styles/TaskItem.module.css';
 import Modal from './Modal';
 
 const TaskItem = ({ task, onToggleCompletion, onDeleteTask }) => {
-  const { id, title, description, priority, dueDate, completed } = task;
+  const { id, title, description, priority, dueDate, completed, createdAt } = task;
 
   // Truncate
   const truncate = (text, limit = 100) =>
     text.length > limit ? text.substring(0, limit) + '...' : text;
 
   // Format due date
-  const formatDueDate = (date) => {
+  const formatDate = (date) => {
     if (!date) return '';
     return new Date(date).toLocaleString('en-US', {
       year: 'numeric',
@@ -66,9 +66,11 @@ const TaskItem = ({ task, onToggleCompletion, onDeleteTask }) => {
                 {truncate(description, 50)}
               </p>
             )}
-            {dueDate && (
+            {(dueDate || createdAt) && (
               <p className={styles.dueDate}>
-                Due: {formatDueDate(dueDate)}
+                {dueDate && <>Due: {formatDate(dueDate)}</>}
+                {dueDate && createdAt && ' • '}
+                {createdAt && <>Created: {formatDate(createdAt)}</>}
               </p>
             )}
           </div>
@@ -88,7 +90,7 @@ const TaskItem = ({ task, onToggleCompletion, onDeleteTask }) => {
         onClose={handleCloseModal}
         onConfirm={handleConfirmDelete}
         title="Confirm Deletion"
-        message={`Are you sure you want to delete the task "${title}"?`}
+        message={`Are you sure you want to delete the task "${truncate(title, 10)}"?`}
       />
     </li>
   );
