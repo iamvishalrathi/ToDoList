@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styles from '../styles/TaskItem.module.css';
 import Modal from './Modal';
+import ViewTaskModal from './ViewTaskModal';
 
 const TaskItem = ({ task, onToggleCompletion, onDeleteTask }) => {
   const { id, title, description, priority, dueDate, completed, createdAt } = task;
@@ -21,6 +22,7 @@ const TaskItem = ({ task, onToggleCompletion, onDeleteTask }) => {
     });
   };
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isViewModalOpen, setIsViewModalOpen] = useState(false);
 
   // Open delete confirmation modal
   const handleDeleteClick = () => {
@@ -76,13 +78,22 @@ const TaskItem = ({ task, onToggleCompletion, onDeleteTask }) => {
           </div>
         </div>
       </div>
-      <button
-        onClick={handleDeleteClick}
-        className={styles.deleteButton}
-        aria-label="Delete task"
-      >
-        Delete
-      </button>
+      <div className={styles.actions}>
+        <button
+          onClick={() => setIsViewModalOpen(true)}
+          className={styles.viewButton}
+          aria-label="View task details"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={styles.eyeIcon}><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+        </button>
+        <button
+          onClick={handleDeleteClick}
+          className={styles.deleteButton}
+          aria-label="Delete task"
+        >
+          Delete
+        </button>
+      </div>
 
       {/* Delete Confirmation Modal */}
       <Modal
@@ -91,6 +102,13 @@ const TaskItem = ({ task, onToggleCompletion, onDeleteTask }) => {
         onConfirm={handleConfirmDelete}
         title="Confirm Deletion"
         message={`Are you sure you want to delete the task "${truncate(title, 10)}"?`}
+      />
+
+      {/* View Task Modal */}
+      <ViewTaskModal
+        isOpen={isViewModalOpen}
+        onClose={() => setIsViewModalOpen(false)}
+        task={task}
       />
     </li>
   );
