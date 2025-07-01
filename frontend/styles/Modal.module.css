@@ -364,6 +364,17 @@
   
   .modalHeader {
     padding: var(--spacing-sm);
+    position: relative;
+  }
+  
+  .closeButton {
+    position: absolute;
+    right: var(--spacing-sm);
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
   }
   
   .modalContent {
