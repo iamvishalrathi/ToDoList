@@ -1,0 +1,23 @@
+.emptyContainer {
+    text-align: center;
+    padding: 2rem;
+    color: #555;
+    opacity: 0.9;
+}
+
+.emptyImage {
+    width: 180px;
+    margin: 0 auto 1rem auto;
+    opacity: 0.8;
+}
+
+.emptyTitle {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.emptyText {
+    font-size: 1rem;
+    color: #777;
+}

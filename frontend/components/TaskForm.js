@@ -20,8 +20,12 @@ const TaskForm = ({ onAddTask }) => {
       return;
     }
 
-    // Validate due date if provided
-    if (formData.dueDate && isNaN(Date.parse(formData.dueDate))) {
+    // Validate due date
+    if (!formData.dueDate) {
+      setError('Due date is required');
+      return;
+    }
+    if (isNaN(Date.parse(formData.dueDate))) {
       setError('Invalid due date');
       return;
     }
@@ -71,23 +75,32 @@ const TaskForm = ({ onAddTask }) => {
             disabled={isSubmitting}
           />
           <div className={styles.formRow}>
-            <select
-              value={formData.priority}
-              onChange={(e) => setFormData({ ...formData, priority: e.target.value })}
-              className={styles.select}
-              disabled={isSubmitting}
-            >
-              <option value="low">Low Priority</option>
-              <option value="medium">Medium Priority</option>
-              <option value="high">High Priority</option>
-            </select>
-            <input
-              type="datetime-local"
-              value={formData.dueDate}
-              onChange={(e) => setFormData({ ...formData, dueDate: e.target.value })}
-              className={styles.dateInput}
-              disabled={isSubmitting}
-            />
+            <div className={styles.inputWrapper}>
+              <label htmlFor="priority" className={styles.label}>Priority</label>
+              <select
+                id="priority"
+                value={formData.priority}
+                onChange={(e) => setFormData({ ...formData, priority: e.target.value })}
+                className={styles.select}
+                disabled={isSubmitting}
+              >
+                <option value="low">Low Priority</option>
+                <option value="medium">Medium Priority</option>
+                <option value="high">High Priority</option>
+              </select>
+            </div>
+            <div className={styles.inputWrapper}>
+              <label htmlFor="dueDate" className={styles.label}>Due Date</label>
+              <input
+                id="dueDate"
+                type="datetime-local"
+                value={formData.dueDate}
+                onChange={(e) => setFormData({ ...formData, dueDate: e.target.value })}
+                className={styles.dateInput}
+                disabled={isSubmitting}
+                required
+              />
+            </div>
           </div>
           <button 
             type="submit" 

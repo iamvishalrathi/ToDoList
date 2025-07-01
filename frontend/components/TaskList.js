@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import styles from '../styles/TaskList.module.css';
 import TaskItem from './TaskItem';
 import Modal from './Modal';
+import EmptyState from './EmptyState';
 
 const TaskList = ({ tasks, onToggleCompletion, onDeleteTask, onDeleteAllTasks, onToggleAllTasksCompletion }) => {
   const [isDeleteAllModalOpen, setIsDeleteAllModalOpen] = useState(false);
@@ -61,7 +62,7 @@ const TaskList = ({ tasks, onToggleCompletion, onDeleteTask, onDeleteAllTasks, o
   };
 
   if (tasks.length === 0) {
-    return <p className={styles.emptyMessage}>No tasks yet. Add a task to get started!</p>;
+    return <EmptyState />;;
   }
 
   return (

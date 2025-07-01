@@ -50,10 +50,26 @@
   justify-content: center;
   align-items: center;
   margin-top: 2rem;
+  text-align: center;
+  padding: 1rem 0;
 }
 
 .footer p {
   color: #666;
+}
+
+.footerText {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.heartIcon {
+  width: 16px;
+  height: 16px;
+  margin: 0 4px;
+  color:#e53e3e;
 }
 
 /* Responsive adjustments */

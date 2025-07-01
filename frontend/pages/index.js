@@ -4,6 +4,7 @@ import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import TaskForm from '../components/TaskForm';
 import TaskList from '../components/TaskList';
+import { Heart } from "lucide-react";
 
 // Use environment variable for API URL
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
@@ -136,7 +137,15 @@ export default function Home() {
       </main>
 
       <footer className={styles.footer}>
-        <p>MERN Stack To-Do List Application</p>
+        <p className={styles.footerText}>
+          Made with{' '}
+          <img
+            src="https://www.svgrepo.com/show/312938/red-heart.svg"
+            alt="love"
+            className={styles.heartIcon}
+          />{' '}
+          by Vishal Kumar
+        </p>
       </footer>
     </div>
   );
