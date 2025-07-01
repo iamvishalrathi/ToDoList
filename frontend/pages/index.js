@@ -4,6 +4,7 @@ import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import TaskForm from '../components/TaskForm';
 import TaskList from '../components/TaskList';
+import { ModalProvider } from '../components/ModalProvider';
 
 
 // Use environment variable for API URL
@@ -107,46 +108,48 @@ export default function Home() {
   }, []);
 
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>To-Do List App</title>
-        <meta name="description" content="A simple to-do list application" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <ModalProvider>
+      <div className={styles.container}>
+        <Head>
+          <title>To-Do List App</title>
+          <meta name="description" content="A simple to-do list application" />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>To-Do List</h1>
+        <main className={styles.main}>
+          <h1 className={styles.title}>To-Do List</h1>
 
-        <div className={styles.grid}>
-          <TaskForm onAddTask={addTask} />
-          
-          {error && <p className={styles.error}>{error}</p>}
-          
-          {loading ? (
-            <p>Loading tasks...</p>
-          ) : (
-            <TaskList
-              tasks={tasks}
-              onToggleCompletion={toggleTaskCompletion}
-              onDeleteTask={deleteTask}
-              onDeleteAllTasks={deleteAllTasks}
-              onToggleAllTasksCompletion={toggleAllTasksCompletion}
-            />
-          )}
-        </div>
-      </main>
+          <div className={styles.grid}>
+            <TaskForm onAddTask={addTask} />
+            
+            {error && <p className={styles.error}>{error}</p>}
+            
+            {loading ? (
+              <p>Loading tasks...</p>
+            ) : (
+              <TaskList
+                tasks={tasks}
+                onToggleCompletion={toggleTaskCompletion}
+                onDeleteTask={deleteTask}
+                onDeleteAllTasks={deleteAllTasks}
+                onToggleAllTasksCompletion={toggleAllTasksCompletion}
+              />
+            )}
+          </div>
+        </main>
 
-      <footer className={styles.footer}>
-        <p className={styles.footerText}>
-          Made with{' '}
-          <img
-            src="https://www.svgrepo.com/show/312938/red-heart.svg"
-            alt="love"
-            className={styles.heartIcon}
-          />{' '}
-          by Vishal Kumar
-        </p>
-      </footer>
-    </div>
+        <footer className={styles.footer}>
+          <p className={styles.footerText}>
+            Made with{' '}
+            <img
+              src="https://www.svgrepo.com/show/312938/red-heart.svg"
+              alt="love"
+              className={styles.heartIcon}
+            />{' '}
+            by Vishal Kumar
+          </p>
+        </footer>
+      </div>
+    </ModalProvider>
   );
 }

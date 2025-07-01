@@ -1,0 +1,209 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: 1000;
+  padding: 0;
+  overflow-y: auto;
+}
+
+.modal {
+  background-color: var(--bg-primary);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-lg);
+  width: 100%;
+  max-width: 600px;
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  animation: modalEnter 0.3s ease-out;
+  margin: var(--spacing-md) auto;
+}
+
+@keyframes modalEnter {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-lg);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  padding: var(--spacing-xs);
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: color 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeButton:hover {
+  color: var(--text-primary);
+}
+
+.content {
+  padding: var(--spacing-lg);
+  overflow-y: auto;
+  flex: 1;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg);
+  border-top: 1px solid var(--border-color);
+}
+
+/* Task Details Specific Styles */
+.taskDetails {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.detailRow {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.detailLabel {
+  font-weight: 500;
+  color: var(--text-secondary);
+  min-width: 100px;
+}
+
+.detailValue {
+  color: var(--text-primary);
+  flex: 1;
+}
+
+/* Delete Confirmation Specific Styles */
+.deleteConfirmation {
+  text-align: center;
+  padding: var(--spacing-lg) 0;
+}
+
+.deleteMessage {
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-lg);
+}
+
+.deleteActions {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-md);
+}
+
+.cancelButton {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  color: var(--text-primary);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.cancelButton:hover {
+  background-color: var(--border-color);
+}
+
+.confirmButton {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background-color: var(--danger-color);
+  border: none;
+  border-radius: var(--border-radius-md);
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.confirmButton:hover {
+  background-color: #c53030;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+  .backdrop {
+    align-items: flex-start;
+    padding: 0;
+  }
+  
+  .modal {
+    max-height: 100vh;
+    border-radius: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .header {
+    position: sticky;
+    top: 0;
+    background-color: var(--bg-primary);
+    z-index: 10;
+  }
+
+  .content {
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .detailRow {
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+
+  .detailLabel {
+    min-width: auto;
+    font-weight: 600;
+  }
+
+  .actions {
+    flex-direction: column;
+    position: sticky;
+    bottom: 0;
+    background-color: var(--bg-primary);
+    z-index: 10;
+  }
+
+  .cancelButton,
+  .confirmButton {
+    width: 100%;
+    padding: var(--spacing-md);
+    min-height: 3rem;
+    font-size: 1rem;
+  }
+}
