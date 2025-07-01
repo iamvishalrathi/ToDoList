@@ -1,7 +1,4 @@
-import { useState } from 'react';
 import styles from '../styles/TaskItem.module.css';
-import Modal from './Modal';
-import ViewTaskModal from './ViewTaskModal';
 
 const TaskItem = ({ task, onToggleCompletion, onDeleteTask }) => {
   const { id, title, description, priority, dueDate, completed, createdAt } = task;
@@ -21,23 +18,11 @@ const TaskItem = ({ task, onToggleCompletion, onDeleteTask }) => {
       minute: '2-digit'
     });
   };
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [isViewModalOpen, setIsViewModalOpen] = useState(false);
-
-  // Open delete confirmation modal
+  // Handle delete click
   const handleDeleteClick = () => {
-    setIsDeleteModalOpen(true);
-  };
-
-  // Close modal without deleting
-  const handleCloseModal = () => {
-    setIsDeleteModalOpen(false);
-  };
-
-  // Confirm deletion and close modal
-  const handleConfirmDelete = () => {
-    onDeleteTask(id);
-    setIsDeleteModalOpen(false);
+    if (window.confirm(`Are you sure you want to delete the task "${truncate(title, 10)}"?`)) {
+      onDeleteTask(id);
+    }
   };
 
   return (
@@ -80,7 +65,7 @@ const TaskItem = ({ task, onToggleCompletion, onDeleteTask }) => {
       </div>
       <div className={styles.actions}>
         <button
-          onClick={() => setIsViewModalOpen(true)}
+          onClick={() => alert(`Task Details:\n\nTitle: ${title}\nDescription: ${description || 'None'}\nPriority: ${priority}\nDue Date: ${formatDate(dueDate)}\nCreated: ${formatDate(createdAt)}\nStatus: ${completed ? 'Completed' : 'Active'}`)}
           className={styles.viewButton}
           aria-label="View task details"
         >
@@ -95,21 +80,6 @@ const TaskItem = ({ task, onToggleCompletion, onDeleteTask }) => {
         </button>
       </div>
 
-      {/* Delete Confirmation Modal */}
-      <Modal
-        isOpen={isDeleteModalOpen}
-        onClose={handleCloseModal}
-        onConfirm={handleConfirmDelete}
-        title="Confirm Deletion"
-        message={`Are you sure you want to delete the task "${truncate(title, 10)}"?`}
-      />
-
-      {/* View Task Modal */}
-      <ViewTaskModal
-        isOpen={isViewModalOpen}
-        onClose={() => setIsViewModalOpen(false)}
-        task={task}
-      />
     </li>
   );
 };

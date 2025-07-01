@@ -1,12 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import styles from '../styles/TaskList.module.css';
 import TaskItem from './TaskItem';
-import Modal from './Modal';
 import EmptyState from './EmptyState';
 import NoTasksFound from './NoTasksFound';
 
 const TaskList = ({ tasks, onToggleCompletion, onDeleteTask, onDeleteAllTasks, onToggleAllTasksCompletion }) => {
-  const [isDeleteAllModalOpen, setIsDeleteAllModalOpen] = useState(false);
+
   const [filters, setFilters] = useState({
     completed: '',
     priority: '',
@@ -48,18 +47,11 @@ const TaskList = ({ tasks, onToggleCompletion, onDeleteTask, onDeleteAllTasks, o
   // Check if all tasks are completed
   const areAllTasksCompleted = tasks.length > 0 && tasks.every(task => task.completed);
   
-  // Handle delete all confirmation
+  // Handle delete all
   const handleDeleteAllClick = () => {
-    setIsDeleteAllModalOpen(true);
-  };
-  
-  const handleCloseDeleteAllModal = () => {
-    setIsDeleteAllModalOpen(false);
-  };
-  
-  const handleConfirmDeleteAll = () => {
-    onDeleteAllTasks();
-    setIsDeleteAllModalOpen(false);
+    if (window.confirm(`Are you sure you want to delete all ${tasks.length} tasks? This action cannot be undone.`)) {
+      onDeleteAllTasks();
+    }
   };
 
   if (tasks.length === 0) {
@@ -137,14 +129,6 @@ const TaskList = ({ tasks, onToggleCompletion, onDeleteTask, onDeleteAllTasks, o
         </ul>
       )}
       
-      {/* Delete All Confirmation Modal */}
-      <Modal
-        isOpen={isDeleteAllModalOpen}
-        onClose={handleCloseDeleteAllModal}
-        onConfirm={handleConfirmDeleteAll}
-        title="Confirm Delete All"
-        message={`Are you sure you want to delete all ${tasks.length} tasks? This action cannot be undone.`}
-      />
     </div>
   );
 };
