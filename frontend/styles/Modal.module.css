@@ -7,7 +7,7 @@
   background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   z-index: 1000;
   padding: 0;
   overflow-y: auto;
@@ -19,62 +19,125 @@
   box-shadow: var(--shadow-lg);
   width: 100%;
   max-width: 600px;
-  max-height: 100vh;
+  max-height: 90vh;
   display: flex;
   flex-direction: column;
   animation: modalEnter 0.3s ease-out;
-  margin: var(--spacing-md) auto;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
 }
 
 @keyframes modalEnter {
   from {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: scale(0.95);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: scale(1);
   }
 }
 
-.header {
+@keyframes modalExit {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+@keyframes backdropEnter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes backdropExit {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.backdropVisible {
+  animation: backdropEnter 0.3s ease-out forwards;
+}
+
+.backdropHidden {
+  animation: backdropExit 0.3s ease-out forwards;
+}
+
+.modalVisible {
+  animation: modalEnter 0.3s ease-out forwards;
+}
+
+.modalHidden {
+  animation: modalExit 0.3s ease-out forwards;
+}
+
+.modalHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: var(--spacing-lg);
   border-bottom: 1px solid var(--border-color);
+  background-color: var(--bg-secondary);
 }
 
-.title {
+.modalTitle {
   margin: 0;
   font-size: 1.25rem;
   font-weight: 600;
   color: var(--text-primary);
+  text-align: center;
+  flex: 1;
 }
 
 .closeButton {
-  background: none;
+  background: transparent;
   border: none;
-  padding: var(--spacing-xs);
+  font-size: 1.75rem;
   cursor: pointer;
   color: var(--text-secondary);
-  transition: color 0.2s ease-in-out;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  transition: background-color 0.2s, color 0.2s;
+  position: absolute;
+  right: var(--spacing-sm);
+  top: var(--spacing-sm);
+  z-index: 10;
 }
 
 .closeButton:hover {
+  background-color: rgba(0, 0, 0, 0.1);
   color: var(--text-primary);
 }
 
-.content {
+.closeButton:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--primary-color);
+}
+
+.modalContent {
   padding: var(--spacing-lg);
   overflow-y: auto;
   flex: 1;
 }
 
-.actions {
+.modalActions {
   display: flex;
   justify-content: flex-end;
   gap: var(--spacing-md);
@@ -155,23 +218,22 @@
 /* Responsive Adjustments */
 @media (max-width: 600px) {
   .backdrop {
-    align-items: flex-start;
+    align-items: center;
     padding: 0;
   }
   
   .modal {
-    max-height: 100vh;
-    border-radius: 0;
-    margin: 0;
-    height: 100%;
-    width: 100%;
+    max-height: 90vh;
+    border-radius: var(--border-radius-lg);
+    margin: 0 var(--spacing-md);
+    width: calc(100% - var(--spacing-md) * 2);
     max-width: 100%;
   }
 
-  .header {
+  .modalHeader {
     position: sticky;
     top: 0;
-    background-color: var(--bg-primary);
+    background-color: var(--bg-secondary);
     z-index: 10;
   }
 
