@@ -7,10 +7,50 @@
 
 .listHeader {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
   margin-bottom: 1rem;
+}
+
+.filters {
+  display: flex;
+  gap: 0.75rem;
   flex-wrap: wrap;
+  width: 100%;
+}
+
+.searchInput,
+.filterSelect {
+  padding: 0.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.searchInput {
+  flex: 2;
+  min-width: 200px;
+}
+
+.filterSelect {
+  flex: 1;
+  min-width: 150px;
+  cursor: pointer;
+  background-color: white;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  background-size: 1rem;
+  padding-right: 2rem;
+  appearance: none;
+}
+
+.searchInput:focus,
+.filterSelect:focus {
+  border-color: #0070f3;
+  box-shadow: 0 0 0 3px rgba(0, 112, 243, 0.1);
 }
 
 .listTitle {
@@ -83,9 +123,15 @@
 }
 
 @media (max-width: 600px) {
-  .listHeader {
+  .filters {
     flex-direction: column;
-    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .searchInput,
+  .filterSelect {
+    width: 100%;
+    min-width: unset;
   }
   
   .bulkActions {

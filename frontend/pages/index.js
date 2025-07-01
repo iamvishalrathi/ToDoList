@@ -13,11 +13,19 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fetch all tasks
-  const fetchTasks = async () => {
+  // Fetch tasks with filters
+  const fetchTasks = async (filters = {}) => {
     try {
       setLoading(true);
-      const response = await axios.get(`${API_URL}/tasks`);
+      const params = new URLSearchParams();
+      
+      // Add filters to query params
+      if (filters.completed !== undefined) params.append('completed', filters.completed);
+      if (filters.priority) params.append('priority', filters.priority);
+      if (filters.title) params.append('title', filters.title);
+      if (filters.sortBy) params.append('sortBy', filters.sortBy);
+      
+      const response = await axios.get(`${API_URL}/tasks?${params.toString()}`);
       setTasks(response.data);
       setError(null);
     } catch (err) {
@@ -29,9 +37,9 @@ export default function Home() {
   };
 
   // Add a new task
-  const addTask = async (title) => {
+  const addTask = async (taskData) => {
     try {
-      const response = await axios.post(`${API_URL}/tasks`, { title });
+      const response = await axios.post(`${API_URL}/tasks`, taskData);
       setTasks([...tasks, response.data]);
       return true;
     } catch (err) {
@@ -41,7 +49,7 @@ export default function Home() {
     }
   };
 
-  // Toggle task completion status
+  // Update task
   const toggleTaskCompletion = async (id, completed) => {
     try {
       const response = await axios.put(`${API_URL}/tasks/${id}`, {
@@ -50,7 +58,7 @@ export default function Home() {
       
       setTasks(
         tasks.map((task) =>
-          task.id === id ? { ...task, completed: !completed } : task
+          task.id === id ? { ...response.data } : task
         )
       );
     } catch (err) {
