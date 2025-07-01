@@ -88,6 +88,21 @@ A simple To-Do List application built with MERN stack (MongoDB in-memory impleme
 ## Features
 
 - Create, read, update, and delete tasks
-- Mark tasks as completed
+- Mark tasks as completed or active
+- Bulk delete all tasks
+- Filter tasks by status (All, Active, Completed)
+- Search tasks by keyword
 - Responsive design for mobile and desktop
-- Simple and intuitive user interface
+- Accessible UI with ARIA labels
+- Modal dialogs for viewing and deleting tasks
+- Intuitive and modern user interface
+
+## Website Preview
+
+### Desktop View
+
+![Desktop Preview](frontend/public/sns-desktop.png)
+
+### Mobile View
+
+![Mobile Preview](frontend/public/sns-mobile.png)
