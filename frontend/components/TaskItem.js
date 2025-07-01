@@ -5,6 +5,10 @@ import Modal from './Modal';
 const TaskItem = ({ task, onToggleCompletion, onDeleteTask }) => {
   const { id, title, description, priority, dueDate, completed } = task;
 
+  // Truncate
+  const truncate = (text, limit = 100) =>
+    text.length > limit ? text.substring(0, limit) + '...' : text;
+
   // Format due date
   const formatDueDate = (date) => {
     if (!date) return '';
@@ -47,18 +51,20 @@ const TaskItem = ({ task, onToggleCompletion, onDeleteTask }) => {
           />
           <div className={styles.taskDetails}>
             <div className={styles.titleRow}>
-              <label 
+              <label
                 htmlFor={`task-${id}`}
                 className={`${styles.title} ${completed ? styles.titleCompleted : ''}`}
               >
-                {title}
+                {truncate(title, 50)}
               </label>
               <span className={`${styles.priority} ${styles[priority]}`}>
                 {priority}
               </span>
             </div>
             {description && (
-              <p className={styles.description}>{description}</p>
+              <p className={styles.description}>
+                {truncate(description, 50)}
+              </p>
             )}
             {dueDate && (
               <p className={styles.dueDate}>
