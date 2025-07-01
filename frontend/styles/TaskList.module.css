@@ -1,8 +1,11 @@
 .listContainer {
   width: 100%;
   max-width: 800px;
-  margin: 0 auto;
-  padding: 1rem;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: var(--bg-primary);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-lg);
 }
 
 .listHeader {
@@ -21,12 +24,13 @@
 
 .searchInput,
 .filterSelect {
-  padding: 0.5rem;
-  border: 1px solid #e2e8f0;
-  border-radius: 4px;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
   font-size: 0.875rem;
   outline: none;
   transition: all 0.2s;
+  background-color: var(--bg-secondary);
 }
 
 .searchInput {
@@ -49,14 +53,16 @@
 
 .searchInput:focus,
 .filterSelect:focus {
-  border-color: #0070f3;
-  box-shadow: 0 0 0 3px rgba(0, 112, 243, 0.1);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  background-color: var(--bg-primary);
 }
 
 .listTitle {
-  font-size: 1.5rem;
-  color: #333;
-  margin: 0.5rem 0;
+  font-size: 1.75rem;
+  color: var(--text-primary);
+  margin: 0.5rem 0 1.5rem;
+  font-weight: 600;
 }
 
 .bulkActions {
@@ -83,21 +89,25 @@
 }
 
 .completeButton {
-  background-color: #4caf50;
+  background-color: var(--success-color);
   color: white;
 }
 
 .completeButton:hover {
-  background-color: #3d8b40;
+  background-color: #059669;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
 }
 
 .uncompleteButton {
-  background-color: #ff9800;
+  background-color: var(--warning-color);
   color: white;
 }
 
 .uncompleteButton:hover {
-  background-color: #e68900;
+  background-color: #d97706;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
 }
 
 .deleteAllButton {

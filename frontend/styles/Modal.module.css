@@ -13,26 +13,30 @@
 }
 
 .modalContent {
-  background-color: white;
-  border-radius: 0.5rem;
+  background-color: var(--bg-primary);
+  border-radius: 1rem;
   width: 90%;
   max-width: 500px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  animation: slideIn 0.3s ease-out;
+  box-shadow: var(--shadow-lg);
+  animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid var(--border-color);
 }
 
 .modalHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 1.5rem;
-  border-bottom: 1px solid #e2e8f0;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--bg-secondary);
+  border-radius: 1rem 1rem 0 0;
 }
 
 .modalTitle {
   margin: 0;
   font-size: 1.25rem;
-  color: #2d3748;
+  color: var(--text-primary);
+  font-weight: 600;
 }
 
 .closeButton {
@@ -40,17 +44,22 @@
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  color: #a0aec0;
-  transition: color 0.2s ease-in-out;
+  color: var(--text-secondary);
+  transition: all 0.2s ease-in-out;
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+  line-height: 1;
 }
 
 .closeButton:hover {
-  color: #718096;
+  color: var(--text-primary);
+  background-color: var(--border-color);
 }
 
 .modalBody {
   padding: 1.5rem;
-  color: #4a5568;
+  color: var(--text-secondary);
+  line-height: 1.6;
 }
 
 .modalFooter {
@@ -62,33 +71,38 @@
 }
 
 .cancelButton {
-  padding: 0.5rem 1rem;
-  background-color: #e2e8f0;
-  color: #4a5568;
-  border: none;
-  border-radius: 0.25rem;
+  padding: 0.75rem 1.25rem;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
   font-size: 0.875rem;
+  font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .cancelButton:hover {
-  background-color: #cbd5e0;
+  background-color: var(--border-color);
+  transform: translateY(-1px);
 }
 
 .confirmButton {
-  padding: 0.5rem 1rem;
-  background-color: #e53e3e;
+  padding: 0.75rem 1.25rem;
+  background-color: var(--danger-color);
   color: white;
   border: none;
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
   font-size: 0.875rem;
+  font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .confirmButton:hover {
-  background-color: #c53030;
+  background-color: #dc2626;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
 }
 
 /* Animations */
