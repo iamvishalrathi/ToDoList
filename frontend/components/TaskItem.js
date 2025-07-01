@@ -1,5 +1,7 @@
 import styles from '../styles/TaskItem.module.css';
 import { useModal } from './ModalProvider';
+import ViewTaskModal from './ViewTaskModal';
+import DeleteTaskModal from './DeleteTaskModal';
 
 const TaskItem = ({ task, onToggleCompletion, onDeleteTask }) => {
   const { openModal, closeModal } = useModal();
@@ -21,9 +23,8 @@ const TaskItem = ({ task, onToggleCompletion, onDeleteTask }) => {
     });
   };
   // Handle delete confirmation
-  const handleDeleteConfirm = () => {
-    onDeleteTask(id);
-    closeModal();
+  const handleDeleteTask = (taskId) => {
+    onDeleteTask(taskId);
   };
 
   return (
@@ -68,34 +69,7 @@ const TaskItem = ({ task, onToggleCompletion, onDeleteTask }) => {
         <button
           onClick={() => openModal({
             title: "Task Details",
-            content: (
-              <div className={styles.taskDetails}>
-                <div className={styles.detailRow}>
-                  <span className={styles.detailLabel}>Title:</span>
-                  <span className={styles.detailValue}>{title}</span>
-                </div>
-                <div className={styles.detailRow}>
-                  <span className={styles.detailLabel}>Description:</span>
-                  <span className={styles.detailValue}>{description || 'None'}</span>
-                </div>
-                <div className={styles.detailRow}>
-                  <span className={styles.detailLabel}>Priority:</span>
-                  <span className={`${styles.priority} ${styles[priority]}`}>{priority}</span>
-                </div>
-                <div className={styles.detailRow}>
-                  <span className={styles.detailLabel}>Due Date:</span>
-                  <span className={styles.detailValue}>{formatDate(dueDate)}</span>
-                </div>
-                <div className={styles.detailRow}>
-                  <span className={styles.detailLabel}>Created:</span>
-                  <span className={styles.detailValue}>{formatDate(createdAt)}</span>
-                </div>
-                <div className={styles.detailRow}>
-                  <span className={styles.detailLabel}>Status:</span>
-                  <span className={styles.detailValue}>{completed ? 'Completed' : 'Active'}</span>
-                </div>
-              </div>
-            )
+            content: <ViewTaskModal task={task} />
           })}
           className={styles.viewButton}
           aria-label="View task details"
@@ -105,30 +79,11 @@ const TaskItem = ({ task, onToggleCompletion, onDeleteTask }) => {
         <button
           onClick={() => openModal({
             title: "Delete Task",
-            content: (
-              <div className={styles.deleteConfirmation}>
-                <p className={styles.deleteMessage}>
-                  Are you sure you want to delete the task "{truncate(title, 30)}"?
-                  This action cannot be undone.
-                </p>
-              </div>
-            ),
-            actions: (
-              <div className={styles.deleteActions}>
-                <button
-                  onClick={closeModal}
-                  className={styles.cancelButton}
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={handleDeleteConfirm}
-                  className={styles.confirmButton}
-                >
-                  Delete
-                </button>
-              </div>
-            )
+            content: <DeleteTaskModal 
+              task={task} 
+              onDelete={handleDeleteTask} 
+              onClose={closeModal} 
+            />
           })}
           className={styles.deleteButton}
           aria-label="Delete task"

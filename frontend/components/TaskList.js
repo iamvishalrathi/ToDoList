@@ -4,6 +4,7 @@ import TaskItem from './TaskItem';
 import EmptyState from './EmptyState';
 import NoTasksFound from './NoTasksFound';
 import { useModal } from './ModalProvider';
+import DeleteAllTasksModal from './DeleteAllTasksModal';
 
 const TaskList = ({ tasks, onToggleCompletion, onDeleteTask, onDeleteAllTasks, onToggleAllTasksCompletion }) => {
   const { openModal, closeModal } = useModal();
@@ -54,30 +55,11 @@ const TaskList = ({ tasks, onToggleCompletion, onDeleteTask, onDeleteAllTasks, o
     openModal({
       title: "Delete All Tasks",
       content: (
-        <div className={styles.deleteConfirmation}>
-          <p className={styles.deleteMessage}>
-            Are you sure you want to delete all {tasks.length} tasks? This action cannot be undone.
-          </p>
-        </div>
-      ),
-      actions: (
-        <div className={styles.deleteActions}>
-          <button
-            onClick={closeModal}
-            className={styles.cancelButton}
-          >
-            Cancel
-          </button>
-          <button
-            onClick={() => {
-              onDeleteAllTasks();
-              closeModal();
-            }}
-            className={styles.confirmButton}
-          >
-            Delete All
-          </button>
-        </div>
+        <DeleteAllTasksModal 
+          taskCount={tasks.length} 
+          onDeleteAll={onDeleteAllTasks} 
+          onClose={closeModal} 
+        />
       )
     });
   };
