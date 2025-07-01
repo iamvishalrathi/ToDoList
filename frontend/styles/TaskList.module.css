@@ -1,36 +1,103 @@
 .listContainer {
   width: 100%;
-  background-color: white;
-  border-radius: 0.5rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  padding: 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.listHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
 }
 
 .listTitle {
-  margin-top: 0;
-  margin-bottom: 1rem;
-  font-size: 1.25rem;
-  color: #2d3748;
-  border-bottom: 1px solid #e2e8f0;
-  padding-bottom: 0.75rem;
+  font-size: 1.5rem;
+  color: #333;
+  margin: 0.5rem 0;
+}
+
+.bulkActions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.bulkActionButton {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.bulkActionButton:hover {
+  transform: translateY(-1px);
+}
+
+.bulkActionButton:active {
+  transform: translateY(0);
+}
+
+.completeButton {
+  background-color: #4caf50;
+  color: white;
+}
+
+.completeButton:hover {
+  background-color: #3d8b40;
+}
+
+.uncompleteButton {
+  background-color: #ff9800;
+  color: white;
+}
+
+.uncompleteButton:hover {
+  background-color: #e68900;
+}
+
+.deleteAllButton {
+  background-color: #f44336;
+  color: white;
+}
+
+.deleteAllButton:hover {
+  background-color: #d32f2f;
 }
 
 .list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .emptyMessage {
   text-align: center;
-  color: #718096;
-  padding: 2rem 0;
+  color: #666;
   font-style: italic;
+  margin: 2rem 0;
 }
 
-/* Responsive adjustments */
 @media (max-width: 600px) {
-  .listContainer {
-    padding: 1rem;
+  .listHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .bulkActions {
+    margin-top: 0.5rem;
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .bulkActionButton {
+    flex: 1;
+    text-align: center;
+    font-size: 0.75rem;
+    padding: 0.4rem 0.5rem;
   }
 }

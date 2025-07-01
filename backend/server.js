@@ -78,6 +78,29 @@ app.delete('/tasks/:id', (req, res) => {
   res.json(deletedTask);
 });
 
+// DELETE /tasks - Delete all tasks
+app.delete('/tasks', (req, res) => {
+  const count = tasks.length;
+  tasks = [];
+  res.json({ message: `${count} tasks deleted successfully` });
+});
+
+// PUT /tasks - Update all tasks' completion status
+app.put('/tasks', (req, res) => {
+  const { completed } = req.body;
+  
+  if (typeof completed !== 'boolean') {
+    return res.status(400).json({ error: 'Completed status must be a boolean' });
+  }
+  
+  tasks = tasks.map(task => ({
+    ...task,
+    completed
+  }));
+  
+  res.json(tasks);
+});
+
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

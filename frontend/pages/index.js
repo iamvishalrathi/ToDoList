@@ -70,6 +70,28 @@ export default function Home() {
     }
   };
 
+  // Delete all tasks
+  const deleteAllTasks = async () => {
+    try {
+      await axios.delete(`${API_URL}/tasks`);
+      setTasks([]);
+    } catch (err) {
+      setError('Failed to delete all tasks. Please try again.');
+      console.error('Error deleting all tasks:', err);
+    }
+  };
+
+  // Toggle all tasks' completion status
+  const toggleAllTasksCompletion = async (completed) => {
+    try {
+      const response = await axios.put(`${API_URL}/tasks`, { completed });
+      setTasks(response.data);
+    } catch (err) {
+      setError(`Failed to ${completed ? 'complete' : 'uncomplete'} all tasks. Please try again.`);
+      console.error('Error updating all tasks:', err);
+    }
+  };
+
   // Load tasks on component mount
   useEffect(() => {
     fetchTasks();
@@ -98,6 +120,8 @@ export default function Home() {
               tasks={tasks}
               onToggleCompletion={toggleTaskCompletion}
               onDeleteTask={deleteTask}
+              onDeleteAllTasks={deleteAllTasks}
+              onToggleAllTasksCompletion={toggleAllTasksCompletion}
             />
           )}
         </div>
