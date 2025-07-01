@@ -20,15 +20,19 @@ const ViewTaskModal = ({ task, onClose, isOpen }) => {
   const { title, description, priority, dueDate, completed, createdAt } = task;
 
   return (
-    <div className={modalStyles.taskDetails} role="dialog" aria-label="Task details">
+    <div className={`${modalStyles.taskDetails} ${modalStyles.responsiveDetails}`} role="dialog" aria-label="Task details">
       <div className={modalStyles.detailRow}>
         <span className={modalStyles.detailLabel} id="title-label">Title:</span>
-        <span className={modalStyles.detailValue} aria-labelledby="title-label">{title}</span>
+        <span className={`${modalStyles.detailValue} ${modalStyles.titleValue}`} aria-labelledby="title-label">{title}</span>
       </div>
+      
       <div className={modalStyles.detailRow}>
         <span className={modalStyles.detailLabel} id="description-label">Description:</span>
-        <span className={modalStyles.detailValue} aria-labelledby="description-label">{description || 'None'}</span>
+        <div className={`${modalStyles.detailValue} ${modalStyles.descriptionValue}`} aria-labelledby="description-label">
+          {description || 'None'}
+        </div>
       </div>
+      
       <div className={modalStyles.detailRow}>
         <span className={modalStyles.detailLabel} id="priority-label">Priority:</span>
         <span 
@@ -38,18 +42,21 @@ const ViewTaskModal = ({ task, onClose, isOpen }) => {
           {priority}
         </span>
       </div>
+      
       <div className={modalStyles.detailRow}>
         <span className={modalStyles.detailLabel} id="duedate-label">Due Date:</span>
         <span className={modalStyles.detailValue} aria-labelledby="duedate-label">{formatDate(dueDate)}</span>
       </div>
+      
       <div className={modalStyles.detailRow}>
         <span className={modalStyles.detailLabel} id="created-label">Created:</span>
         <span className={modalStyles.detailValue} aria-labelledby="created-label">{formatDate(createdAt)}</span>
       </div>
+      
       <div className={modalStyles.detailRow}>
         <span className={modalStyles.detailLabel} id="status-label">Status:</span>
         <span 
-          className={modalStyles.detailValue}
+          className={`${modalStyles.detailValue} ${completed ? modalStyles.statusCompleted : modalStyles.statusActive}`}
           aria-labelledby="status-label"
         >
           {completed ? 'Completed' : 'Active'}

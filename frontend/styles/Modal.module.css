@@ -150,15 +150,30 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-md);
+  padding: var(--spacing-md);
+}
+
+.responsiveDetails {
+  max-height: 70vh;
+  overflow-y: auto;
 }
 
 .detailRow {
   display: flex;
   gap: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 1px solid var(--border-color-light, rgba(0, 0, 0, 0.05));
+}
+
+.detailRow:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 .detailLabel {
-  font-weight: 500;
+  font-weight: 600;
   color: var(--text-secondary);
   min-width: 100px;
 }
@@ -166,6 +181,27 @@
 .detailValue {
   color: var(--text-primary);
   flex: 1;
+  word-break: break-word;
+}
+
+.titleValue {
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+.descriptionValue {
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.statusCompleted {
+  color: var(--success-color, #10b981);
+  font-weight: 500;
+}
+
+.statusActive {
+  color: var(--warning-color, #f59e0b);
+  font-weight: 500;
 }
 
 /* Delete Confirmation Specific Styles */
@@ -266,11 +302,26 @@
   .detailRow {
     flex-direction: column;
     gap: var(--spacing-xs);
+    padding: var(--spacing-xs) 0;
+    margin-bottom: var(--spacing-xs);
   }
 
   .detailLabel {
     min-width: auto;
     font-weight: 600;
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  .titleValue {
+    font-size: 1rem;
+  }
+  
+  .descriptionValue {
+    max-height: 150px;
+    overflow-y: auto;
+    padding: var(--spacing-xs);
+    background-color: var(--bg-secondary, #f9fafb);
+    border-radius: var(--border-radius-sm, 4px);
   }
 
   .modalActions,

@@ -72,62 +72,78 @@ const TaskList = ({ tasks, onToggleCompletion, onDeleteTask, onDeleteAllTasks, o
     <div className={styles.listContainer}>
       <div className={styles.listHeader}>
         <h2 className={styles.listTitle}>Your Tasks</h2>
-        <div className={styles.filters}>
-          <input
-            type="text"
-            placeholder="Search tasks..."
-            value={filters.searchText}
-            onChange={(e) => setFilters({ ...filters, searchText: e.target.value })}
-            className={styles.searchInput}
-          />
-          <select
-            value={filters.completed}
-            onChange={(e) => setFilters({ ...filters, completed: e.target.value })}
-            className={styles.filterSelect}
-          >
-            <option value="">All Status</option>
-            <option value="true">Completed</option>
-            <option value="false">Active</option>
-          </select>
-          <select
-            value={filters.priority}
-            onChange={(e) => setFilters({ ...filters, priority: e.target.value })}
-            className={styles.filterSelect}
-          >
-            <option value="">All Priorities</option>
-            <option value="high">High Priority</option>
-            <option value="medium">Medium Priority</option>
-            <option value="low">Low Priority</option>
-          </select>
-          <select
-            value={sortBy}
-            onChange={(e) => setSortBy(e.target.value)}
-            className={styles.filterSelect}
-          >
-            <option value="createdAt">Sort by Created Date</option>
-            <option value="dueDate">Sort by Due Date</option>
-            <option value="priority">Sort by Priority</option>
-          </select>
+        
+        <div className={styles.filterSection}>
+          <div className={styles.searchContainer}>
+            <input
+              type="text"
+              placeholder="Search tasks..."
+              value={filters.searchText}
+              onChange={(e) => setFilters({ ...filters, searchText: e.target.value })}
+              className={styles.searchInput}
+              aria-label="Search tasks"
+            />
+          </div>
+          
+          <div className={styles.filters}>
+            <select
+              value={filters.completed}
+              onChange={(e) => setFilters({ ...filters, completed: e.target.value })}
+              className={styles.filterSelect}
+              aria-label="Filter by status"
+            >
+              <option value="">All Status</option>
+              <option value="true">Completed</option>
+              <option value="false">Active</option>
+            </select>
+            
+            <select
+              value={filters.priority}
+              onChange={(e) => setFilters({ ...filters, priority: e.target.value })}
+              className={styles.filterSelect}
+              aria-label="Filter by priority"
+            >
+              <option value="">All Priorities</option>
+              <option value="high">High Priority</option>
+              <option value="medium">Medium Priority</option>
+              <option value="low">Low Priority</option>
+            </select>
+            
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+              className={styles.filterSelect}
+              aria-label="Sort tasks"
+            >
+              <option value="createdAt">Sort by Created Date</option>
+              <option value="dueDate">Sort by Due Date</option>
+              <option value="priority">Sort by Priority</option>
+            </select>
+          </div>
         </div>
+        
         <div className={styles.bulkActions}>
           <button 
             className={`${styles.bulkActionButton} ${areAllTasksCompleted ? styles.uncompleteButton : styles.completeButton}`}
             onClick={() => onToggleAllTasksCompletion(!areAllTasksCompleted)}
+            aria-label={areAllTasksCompleted ? 'Mark all tasks as uncompleted' : 'Mark all tasks as completed'}
           >
             {areAllTasksCompleted ? 'Mark All Uncompleted' : 'Mark All Completed'}
           </button>
           <button 
             className={`${styles.bulkActionButton} ${styles.deleteAllButton}`}
             onClick={handleDeleteAllClick}
+            aria-label="Delete all tasks"
           >
             Delete All
           </button>
         </div>
       </div>
+      
       {filteredAndSortedTasks.length === 0 ? (
         <NoTasksFound />
       ) : (
-        <ul className={styles.list}>
+        <ul className={styles.list} role="list" aria-label="Task list">
           {filteredAndSortedTasks.map(task => (
             <TaskItem
               key={task.id}
@@ -138,7 +154,6 @@ const TaskList = ({ tasks, onToggleCompletion, onDeleteTask, onDeleteAllTasks, o
           ))}
         </ul>
       )}
-      
     </div>
   );
 };
