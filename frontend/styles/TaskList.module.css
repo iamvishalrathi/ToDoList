@@ -1,11 +1,12 @@
 .listContainer {
   width: 100%;
   max-width: 800px;
-  margin: 2rem auto;
-  padding: 2rem;
+  margin: var(--spacing-xl) auto;
+  padding: var(--spacing-xl);
   background-color: var(--bg-primary);
-  border-radius: 1rem;
+  border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-lg);
+  transition: transform 0.2s ease-in-out;
 }
 
 .listHeader {
@@ -133,27 +134,41 @@
 }
 
 @media (max-width: 600px) {
+  .listContainer {
+    margin: var(--spacing-md);
+    padding: var(--spacing-lg);
+  }
+
   .filters {
     flex-direction: column;
-    gap: 0.5rem;
+    gap: var(--spacing-sm);
   }
 
   .searchInput,
   .filterSelect {
     width: 100%;
     min-width: unset;
+    font-size: 1rem;
+    padding: var(--spacing-md);
   }
   
   .bulkActions {
-    margin-top: 0.5rem;
+    margin-top: var(--spacing-md);
     width: 100%;
     justify-content: space-between;
+    gap: var(--spacing-sm);
   }
   
   .bulkActionButton {
     flex: 1;
     text-align: center;
-    font-size: 0.75rem;
-    padding: 0.4rem 0.5rem;
+    font-size: 0.875rem;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+  }
+
+  .listTitle {
+    font-size: 1.5rem;
+    margin: var(--spacing-md) 0 var(--spacing-lg);
   }
 }
