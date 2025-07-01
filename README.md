@@ -35,11 +35,17 @@ A simple To-Do List application built with MERN stack (MongoDB in-memory impleme
    npm install
    ```
 
-3. Start the server:
+3. Set up environment variables:
+   ```
+   cp .env.example .env
+   ```
+   You can modify the values in the .env file according to your needs.
+
+4. Start the server:
    ```
    npm start
    ```
-   The server will run on http://localhost:5000
+   The server will run on http://localhost:5000 (or the port specified in your .env file)
 
 ### Frontend Setup
 
@@ -53,7 +59,13 @@ A simple To-Do List application built with MERN stack (MongoDB in-memory impleme
    npm install
    ```
 
-3. Start the development server:
+3. Set up environment variables:
+   ```
+   cp .env.example .env
+   ```
+   You can modify the values in the .env file according to your needs.
+
+4. Start the development server:
    ```
    npm run dev
    ```

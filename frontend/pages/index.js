@@ -5,7 +5,8 @@ import styles from '../styles/Home.module.css';
 import TaskForm from '../components/TaskForm';
 import TaskList from '../components/TaskList';
 
-const API_URL = 'http://localhost:5000';
+// Use environment variable for API URL
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
 export default function Home() {
   const [tasks, setTasks] = useState([]);
