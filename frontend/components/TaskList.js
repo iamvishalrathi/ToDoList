@@ -3,6 +3,7 @@ import styles from '../styles/TaskList.module.css';
 import TaskItem from './TaskItem';
 import Modal from './Modal';
 import EmptyState from './EmptyState';
+import NoTasksFound from './NoTasksFound';
 
 const TaskList = ({ tasks, onToggleCompletion, onDeleteTask, onDeleteAllTasks, onToggleAllTasksCompletion }) => {
   const [isDeleteAllModalOpen, setIsDeleteAllModalOpen] = useState(false);
@@ -121,16 +122,20 @@ const TaskList = ({ tasks, onToggleCompletion, onDeleteTask, onDeleteAllTasks, o
           </button>
         </div>
       </div>
-      <ul className={styles.list}>
-        {filteredAndSortedTasks.map((task) => (
-          <TaskItem
-            key={task.id}
-            task={task}
-            onToggleCompletion={onToggleCompletion}
-            onDeleteTask={onDeleteTask}
-          />
-        ))}
-      </ul>
+      {filteredAndSortedTasks.length === 0 ? (
+        <NoTasksFound />
+      ) : (
+        <ul className={styles.list}>
+          {filteredAndSortedTasks.map(task => (
+            <TaskItem
+              key={task.id}
+              task={task}
+              onToggleCompletion={onToggleCompletion}
+              onDeleteTask={onDeleteTask}
+            />
+          ))}
+        </ul>
+      )}
       
       {/* Delete All Confirmation Modal */}
       <Modal

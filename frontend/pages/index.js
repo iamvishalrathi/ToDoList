@@ -4,7 +4,7 @@ import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import TaskForm from '../components/TaskForm';
 import TaskList from '../components/TaskList';
-import { Heart } from "lucide-react";
+
 
 // Use environment variable for API URL
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
