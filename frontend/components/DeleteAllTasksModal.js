@@ -1,6 +1,5 @@
 import React from 'react';
 import modalStyles from '../styles/Modal.module.css';
-import listStyles from '../styles/TaskList.module.css';
 
 const DeleteAllTasksModal = ({ taskCount, onDeleteAll, onClose }) => {
   const handleDeleteAll = () => {
@@ -10,21 +9,23 @@ const DeleteAllTasksModal = ({ taskCount, onDeleteAll, onClose }) => {
 
   return (
     <>
-      <div className={listStyles.deleteConfirmation}>
-        <p className={listStyles.deleteMessage}>
+      <div className={modalStyles.deleteConfirmation}>
+        <p className={modalStyles.deleteMessage}>
           Are you sure you want to delete all {taskCount} tasks? This action cannot be undone.
         </p>
       </div>
-      <div className={listStyles.deleteActions}>
+      <div className={modalStyles.deleteActions}>
         <button
           onClick={onClose}
-          className={listStyles.cancelButton}
+          className={modalStyles.cancelButton}
+          aria-label="Cancel delete all tasks"
         >
           Cancel
         </button>
         <button
           onClick={handleDeleteAll}
-          className={listStyles.confirmButton}
+          className={modalStyles.confirmButton}
+          aria-label="Confirm delete all tasks"
         >
           Delete All
         </button>

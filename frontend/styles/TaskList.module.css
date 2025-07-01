@@ -9,6 +9,21 @@
   transition: transform 0.2s ease-in-out;
 }
 
+@media (max-width: 768px) {
+  .listContainer {
+    padding: var(--spacing-lg);
+    margin: var(--spacing-lg) auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .listContainer {
+    padding: var(--spacing-md);
+    margin: var(--spacing-md) auto;
+    border-radius: var(--border-radius-md);
+  }
+}
+
 .listHeader {
   display: flex;
   flex-direction: column;
@@ -23,11 +38,18 @@
   width: 100%;
 }
 
+@media (max-width: 480px) {
+  .filters {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+}
+
 .searchInput,
 .filterSelect {
   padding: 0.75rem 1rem;
   border: 1px solid var(--border-color);
-  border-radius: 0.5rem;
+  border-radius: var(--border-radius-md);
   font-size: 0.875rem;
   outline: none;
   transition: all 0.2s;
@@ -48,6 +70,17 @@
   background-repeat: no-repeat;
   background-position: right 0.5rem center;
   background-size: 1rem;
+
+  @media (max-width: 480px) {
+
+    .searchInput,
+    .filterSelect {
+      width: 100%;
+      min-width: 100%;
+      flex: none;
+    }
+  }
+
   padding-right: 2rem;
   appearance: none;
 }
@@ -199,14 +232,14 @@
     font-size: 1rem;
     padding: var(--spacing-md);
   }
-  
+
   .bulkActions {
     margin-top: var(--spacing-md);
     width: 100%;
     justify-content: space-between;
     gap: var(--spacing-sm);
   }
-  
+
   .bulkActionButton {
     flex: 1;
     text-align: center;

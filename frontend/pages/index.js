@@ -14,6 +14,7 @@ export default function Home() {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Fetch tasks with filters
   const fetchTasks = async (filters = {}) => {
@@ -41,13 +42,17 @@ export default function Home() {
   // Add a new task
   const addTask = async (taskData) => {
     try {
+      setIsSubmitting(true);
       const response = await axios.post(`${API_URL}/tasks`, taskData);
       setTasks([...tasks, response.data]);
+      setError(null);
       return true;
     } catch (err) {
       setError('Failed to add task. Please try again.');
       console.error('Error adding task:', err);
       return false;
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -108,7 +113,6 @@ export default function Home() {
   }, []);
 
   return (
-    <ModalProvider>
       <div className={styles.container}>
         <Head>
           <title>To-Do List App</title>
@@ -125,7 +129,10 @@ export default function Home() {
             {error && <p className={styles.error}>{error}</p>}
             
             {loading ? (
-              <p>Loading tasks...</p>
+              <div className={styles.loadingContainer}>
+                <div className={styles.loadingSpinner}></div>
+                <p className={styles.loadingText}>Loading tasks...</p>
+              </div>
             ) : (
               <TaskList
                 tasks={tasks}
@@ -133,6 +140,7 @@ export default function Home() {
                 onDeleteTask={deleteTask}
                 onDeleteAllTasks={deleteAllTasks}
                 onToggleAllTasksCompletion={toggleAllTasksCompletion}
+                isSubmitting={isSubmitting}
               />
             )}
           </div>
@@ -141,15 +149,10 @@ export default function Home() {
         <footer className={styles.footer}>
           <p className={styles.footerText}>
             Made with{' '}
-            <img
-              src="https://www.svgrepo.com/show/312938/red-heart.svg"
-              alt="love"
-              className={styles.heartIcon}
-            />{' '}
+            <span className={styles.heartIcon}>❤️</span>{' '}
             by Vishal Kumar
           </p>
         </footer>
       </div>
-    </ModalProvider>
   );
 }

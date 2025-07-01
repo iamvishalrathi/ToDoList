@@ -6,7 +6,7 @@ import NoTasksFound from './NoTasksFound';
 import { useModal } from './ModalProvider';
 import DeleteAllTasksModal from './DeleteAllTasksModal';
 
-const TaskList = ({ tasks, onToggleCompletion, onDeleteTask, onDeleteAllTasks, onToggleAllTasksCompletion }) => {
+const TaskList = ({ tasks, onToggleCompletion, onDeleteTask, onDeleteAllTasks, onToggleAllTasksCompletion, isSubmitting = false }) => {
   const { openModal, closeModal } = useModal();
   
   const [filters, setFilters] = useState({

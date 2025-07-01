@@ -216,6 +216,20 @@
 }
 
 /* Responsive Adjustments */
+@media (max-width: 768px) {
+  .modal {
+    max-width: 90%;
+  }
+  
+  .modalContent {
+    padding: var(--spacing-md);
+  }
+  
+  .modalActions {
+    padding: var(--spacing-md);
+  }
+}
+
 @media (max-width: 600px) {
   .backdrop {
     align-items: center;
@@ -224,9 +238,9 @@
   
   .modal {
     max-height: 90vh;
-    border-radius: var(--border-radius-lg);
-    margin: 0 var(--spacing-md);
-    width: calc(100% - var(--spacing-md) * 2);
+    border-radius: var(--border-radius-md);
+    margin: 0 var(--spacing-sm);
+    width: calc(100% - var(--spacing-sm) * 2);
     max-width: 100%;
   }
 
@@ -235,12 +249,18 @@
     top: 0;
     background-color: var(--bg-secondary);
     z-index: 10;
+    padding: var(--spacing-md);
+  }
+  
+  .modalTitle {
+    font-size: 1.1rem;
   }
 
-  .content {
+  .modalContent {
     flex: 1;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    padding: var(--spacing-md);
   }
 
   .detailRow {
@@ -253,19 +273,51 @@
     font-weight: 600;
   }
 
-  .actions {
+  .modalActions,
+  .deleteActions {
     flex-direction: column;
     position: sticky;
     bottom: 0;
     background-color: var(--bg-primary);
     z-index: 10;
+    gap: var(--spacing-sm);
   }
 
   .cancelButton,
   .confirmButton {
     width: 100%;
     padding: var(--spacing-md);
-    min-height: 3rem;
+    min-height: 44px; /* Better touch target */
     font-size: 1rem;
+  }
+  
+  .closeButton {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal {
+    max-height: 100vh;
+    border-radius: var(--border-radius-md) var(--border-radius-md) 0 0;
+    margin: 0;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    top: auto;
+  }
+  
+  .backdrop {
+    align-items: flex-end;
+  }
+  
+  .modalHeader {
+    padding: var(--spacing-sm);
+  }
+  
+  .modalContent {
+    padding: var(--spacing-sm);
+    max-height: 70vh;
   }
 }

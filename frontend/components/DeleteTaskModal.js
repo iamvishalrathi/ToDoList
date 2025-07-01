@@ -25,12 +25,14 @@ const DeleteTaskModal = ({ task, onDelete, onClose }) => {
         <button
           onClick={onClose}
           className={modalStyles.cancelButton}
+          aria-label="Cancel delete task"
         >
           Cancel
         </button>
         <button
           onClick={handleDelete}
           className={modalStyles.confirmButton}
+          aria-label="Confirm delete task"
         >
           Delete
         </button>
